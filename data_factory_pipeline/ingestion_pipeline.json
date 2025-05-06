@@ -1,0 +1,57 @@
+{
+    "name": "ingestion_pipeline",
+    "properties": {
+        "activities": [
+            {
+                "name": "db_to_raw",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Users/danielpascualsenties@gmail.com/src/db_to_raw"
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureDatabricks2",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "raw_to_datahub",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "db_to_raw",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Users/danielpascualsenties@gmail.com/src/raw_to_datahub"
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureDatabricks2",
+                    "type": "LinkedServiceReference"
+                }
+            }
+        ],
+        "annotations": [],
+        "lastPublishTime": "2025-05-05T22:34:38Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

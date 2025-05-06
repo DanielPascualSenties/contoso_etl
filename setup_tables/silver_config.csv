@@ -1,0 +1,6 @@
+id,raw_path,silver_schema,silver_table_name
+1,dbfs:/raw/dbo_DimAccount,dbo,dimaccount
+2,dbfs:/raw/dbo_DimChannel,dbo,dimchannel
+3,dbfs:/raw/dbo_DimStore,dbo,dimstore
+4,dbfs:/raw/dbo_DimScenario,dbo,dimscenario
+5,dbfs:/raw/dbo_FactInventory,dbo,factinventory
